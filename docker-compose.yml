@@ -1,0 +1,23 @@
+version: '3'
+services:
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - 80:80
+      - 443:443
+    working_dir: /var/www
+    volumes:
+      - .:/var/www
+    links:
+      - mysql
+    image: project-name
+  mysql:
+    image: mysql:5.7
+    command: mysqld --sql_mode=""
+    ports:
+      - 3306:3306
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+
